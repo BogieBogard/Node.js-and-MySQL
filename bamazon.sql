@@ -10,16 +10,13 @@ CREATE database bamazon_db;
 USE bamazon_db;
 
 CREATE TABLE products (
-  position INT NOT NULL,
-  artist VARCHAR(100) NULL,
+  id INT NOT NULL,
+  product_name VARCHAR(100) NULL,
+  department_name VARCHAR(100) NULL,
   song VARCHAR(100) NULL,
-  year INT NULL,
-  raw_total DECIMAL(10,4) NULL,
-  raw_usa DECIMAL(10,4) NULL,
-  raw_uk DECIMAL(10,4) NULL,
-  raw_eur DECIMAL(10,4) NULL,
-  raw_row DECIMAL(10,4) NULL,
-  PRIMARY KEY (position)
+  price INT NULL,
+  stock_quantity INT NULL,
+  PRIMARY KEY (id)
 );
 
 SELECT * FROM products;
