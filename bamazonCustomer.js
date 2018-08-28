@@ -20,23 +20,13 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connected as id " + connection.threadId);
-  runProductDisplay();
+  initialPrompt();
 });
-
-function runProductDisplay() {
-  console.log("Connection established");
-  connection.query("SELECT * FROM products", function(err, res) {
-    if (err) throw err;
-    console.log(res);
-    initialPrompt();
-    connection.end();
-  });
-}
 
 function initialPrompt() {
   inquirer
     .prompt({
-      name: "firstPrompt",
+      name: "action",
       type: "rawlist",
       message: "Enter the ID of the item you would like to buy",
       choices: [
@@ -52,7 +42,7 @@ function initialPrompt() {
     })
     .then(function(answer) {
       switch (answer.action) {
-        case "1":
+        case "ID:1, Item: You Don't Know JS (Hard cover)":
           item1();
           break;
 
@@ -90,24 +80,23 @@ function initialPrompt() {
 function item1() {
   inquirer
     .prompt({
-      name: "firstPrompt",
+      name: "action",
       type: "input",
       message: "What quantity of this item would you like to purchase?"
     })
     .then(function(answer) {
-      var query = "SELECT id, product_name, stock_quantity FROM bamazon_db WHERE ?";
-      connection.query(query, { artist: answer.artist }, function(err, res) {
-        for (var i = 0; i < res.length; i++) {
-          console.log(
-            "Position: " +
-              res[i].position +
-              " || Song: " +
-              res[i].song +
-              " || Year: " +
-              res[i].year
-          );
-        }
-        runSearch();
+      connection.query("SELECT * FROM products WHERE id = '1'", function(err, res) {
+        if (err) throw err;
+        console.log(res);
+        console.log(answer);
+        let test = 5;
+      connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = '1'",
+      [test], function (err, res) {
+        if (err) throw err;
+        console.log(res);
+      });
+
+        connection.end();
       });
     });
 }
