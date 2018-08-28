@@ -33,51 +33,69 @@ function runProductDisplay() {
   });
 }
 
-
 function initialPrompt() {
   inquirer
     .prompt({
-      name: "action",
+      name: "firstPrompt",
       type: "rawlist",
-      message: "What is the ID of the item you would like to buy?",
+      message: "Enter the ID of the item you would like to buy",
       choices: [
-        "0","1","2","3","4"
+        "ID:1, Item: You Don't Know JS (Hard cover)",
+        "ID:2, Item: Echo Dot",
+        "ID:3, Item: Deadpool 2 Blu-Ray Disc",
+        "ID:4, Item: MacBook Pro",
+        "ID:5, Item: Seasonal Fruit Basket",
+        "ID:6, Item: Scorpion Studio Album CD Disc",
+        "ID:7, Item: GitHub Developer Plan Promo Code",
+        "ID:8, Item: Apple Developer Membership Promo Code"
       ]
     })
     .then(function(answer) {
       switch (answer.action) {
-        case "0":
-          artistSearch();
+        case "1":
+          item1();
           break;
 
-        case "Find all artists who appear more than once":
-          multiSearch();
+        case "2":
+          item2();
           break;
 
-        case "Find data within a specific range":
-          rangeSearch();
+        case "3":
+          item3();
           break;
 
-        case "Search for a specific song":
-          songSearch();
+        case "4":
+          item4();
           break;
 
-        case "Find artists with a top song and top album in the same year":
-          songAndAlbumSearch();
+        case "5":
+          item5();
+          break;
+
+        case "6":
+          item6();
+          break;
+
+        case "7":
+          item7();
+          break;
+
+        case "8":
+          item8();
           break;
       }
     });
 }
 
-function artistSearch() {
+function item1() {
   inquirer
     .prompt({
-      name: "artist",
+      name: "firstPrompt",
       type: "input",
-      message: "What artist would you like to search for?"
+      message: "What quantity of this item would you like to purchase?"
     })
     .then(function(answer) {
-      var query = "SELECT position, song, year FROM top5000 WHERE ?";
+      var query = "SELECT id, product_name, stock_quantity FROM bamazon_db WHERE ?";
       connection.query(query, { artist: answer.artist }, function(err, res) {
         for (var i = 0; i < res.length; i++) {
           console.log(
