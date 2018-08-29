@@ -80,18 +80,25 @@ function initialPrompt() {
 function item1() {
   inquirer
     .prompt({
-      name: "action",
+      name: "stock_quantity",
       type: "input",
       message: "What quantity of this item would you like to purchase?"
     })
     .then(function(answer) {
       connection.query("SELECT * FROM products WHERE id = '1'", function(err, res) {
         if (err) throw err;
-        console.log(res);
         console.log(answer);
-        let test = 5;
+        let formattedAnswer1 = JSON.stringify(answer);
+        console.log(formattedAnswer1);
+        let formattedAnswer2 = formattedAnswer1.slice(19);
+        console.log(formattedAnswer2);
+        let formattedAnswer3 = parseInt(formattedAnswer2);
+        console.log(formattedAnswer3);
+
+        console.log(res);
+        
       connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = '1'",
-      [test], function (err, res) {
+      [answer], function (err, res) {
         if (err) throw err;
         console.log(res);
       });
