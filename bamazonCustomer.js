@@ -98,7 +98,7 @@ function item1() {
         console.log(res);
         
       connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = '1'",
-      [answer], function (err, res) {
+      [formattedAnswer3], function (err, res) {
         if (err) throw err;
         console.log(res);
       });
