@@ -1,4 +1,3 @@
-const request = require("request");
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 
@@ -134,11 +133,8 @@ function item2() {
   connection.query("SELECT * FROM products WHERE id = '2'", function(err, res) {
     // Converting the price of the item from an array to an integer
     let formattedPrice1 = JSON.stringify(res);
-    console.log(formattedPrice1);
-    let formattedPrice2 = formattedPrice1.slice(91);
-    console.log(formattedPrice2);
+    let formattedPrice2 = formattedPrice1.slice(75);
     let formattedPrice3 = parseInt(formattedPrice2);
-    console.log(formattedPrice3);
     console.log("*** Please note that the price per unit is: $" + formattedPrice3 + " ***");
   });
   inquirer.prompt({
@@ -151,17 +147,23 @@ function item2() {
         if (err) throw err;
         // Converting the user's choice for the quantity desired
         let formattedAnswer1 = JSON.stringify(answer);
+        console.log(formattedAnswer1);
         let formattedAnswer2 = formattedAnswer1.slice(19);
+        console.log(formattedAnswer2);
         let formattedAnswer3 = parseInt(formattedAnswer2);
+        console.log(formattedAnswer3);
 
         // Converting the amount currently in stock from an array to an integer
         let formattedRes1 = JSON.stringify(res);
-        let formattedRes2 = formattedRes1.slice(111);
+        console.log(formattedRes1);
+        let formattedRes2 = formattedRes1.slice(95);
+        console.log(formattedRes2);
         let formattedRes3 = parseInt(formattedRes2);
+        console.log(formattedRes3);
 
         // We need to create the formatted price again since this function doesn't have access to the variable above
         let formattedPrice1 = JSON.stringify(res);
-        let formattedPrice2 = formattedPrice1.slice(91);
+        let formattedPrice2 = formattedPrice1.slice(75);
         let formattedPrice3 = parseInt(formattedPrice2);
 
         // If the user asks for a quantity that is greater than what is in stock then notify the user
