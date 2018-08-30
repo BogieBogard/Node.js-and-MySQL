@@ -1,5 +1,4 @@
 const request = require("request");
-const fs = require("fs");
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 
@@ -85,25 +84,46 @@ function item1() {
       message: "What quantity of this item would you like to purchase?"
     })
     .then(function(answer) {
-      connection.query("SELECT * FROM products WHERE id = '1'", function(err, res) {
+      connection.query("SELECT * FROM products WHERE id = '1'", function(
+        err,
+        res
+      ) {
         if (err) throw err;
-        console.log(answer);
+        // Converting the user's choice for the quantity desired
         let formattedAnswer1 = JSON.stringify(answer);
-        console.log(formattedAnswer1);
         let formattedAnswer2 = formattedAnswer1.slice(19);
-        console.log(formattedAnswer2);
         let formattedAnswer3 = parseInt(formattedAnswer2);
-        console.log(formattedAnswer3);
+        console.log(
+          "You have requested a total quantity of: " + formattedAnswer3
+        );
 
-        console.log(res);
-        
-      connection.query("UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = '1'",
-      [formattedAnswer3], function (err, res) {
-        if (err) throw err;
-        console.log(res);
-      });
+        // Converting the amount currently in stock from an array to an integer
+        let formattedRes1 = JSON.stringify(res);
+        let formattedRes2 = formattedRes1.slice(111);
+        let formattedRes3 = parseInt(formattedRes2);
+        console.log("Number currently in stock: " + formattedRes3);
 
-        connection.end();
+        // If the user asks for a quantity that is greater than what is in stock then notify the user
+        if (formattedAnswer3 > formattedRes3) {
+          console.log(
+            "Insufficent quantity! You asked for " +
+              formattedAnswer3 +
+              " but we only have " +
+              formattedRes3
+          );
+          connection.end();
+        } else {
+          connection.query(
+            "UPDATE products SET stock_quantity = stock_quantity - ? WHERE id = '1'",
+            [formattedAnswer3],
+            function(err, res) {
+              if (err) throw err;
+              console.log(res);
+            }
+          );
+
+          connection.end();
+        }
       });
     });
 }
