@@ -45,31 +45,31 @@ function initialPrompt() {
           item1();
           break;
 
-        case "2":
+        case "ID:2, Item: Echo Dot":
           item2();
           break;
 
-        case "3":
+        case "ID:3, Item: Deadpool 2 Blu-Ray Disc":
           item3();
           break;
 
-        case "4":
+        case "ID:4, Item: MacBook Pro":
           item4();
           break;
 
-        case "5":
+        case "ID:5, Item: Seasonal Fruit Basket":
           item5();
           break;
 
-        case "6":
+        case "ID:6, Item: Scorpion Studio Album CD Disc":
           item6();
           break;
 
-        case "7":
+        case "ID:7, Item: GitHub Developer Plan Promo Code":
           item7();
           break;
 
-        case "8":
+        case "ID:8, Item: Apple Developer Membership Promo Code":
           item8();
           break;
       }
@@ -134,8 +134,11 @@ function item2() {
   connection.query("SELECT * FROM products WHERE id = '2'", function(err, res) {
     // Converting the price of the item from an array to an integer
     let formattedPrice1 = JSON.stringify(res);
+    console.log(formattedPrice1);
     let formattedPrice2 = formattedPrice1.slice(91);
+    console.log(formattedPrice2);
     let formattedPrice3 = parseInt(formattedPrice2);
+    console.log(formattedPrice3);
     console.log("*** Please note that the price per unit is: $" + formattedPrice3 + " ***");
   });
   inquirer.prompt({
