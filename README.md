@@ -1,4 +1,4 @@
 # Node.js-and-MySQL
 
 
-![](./README-GIF/bamazonCustomer-GIF.mov)
+<img src="https://github.com/BogieBogard/Node.js-and-MySQL/blob/master/README.GIF" alt="demo.GIF">
